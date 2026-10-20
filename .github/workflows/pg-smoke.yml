@@ -42,6 +42,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -49,7 +51,7 @@ jobs:
           python-version: '3.12'
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
         with:
           enable-cache: true
 
@@ -61,3 +63,5 @@ jobs:
       - name: Run pg_smoke tests
         run: |
           pytest tests/kg/pgtable_impl/test_pgtable_smoke.py -m pg_smoke --run-integration -v --tb=short
+    permissions:
+      contents: read
