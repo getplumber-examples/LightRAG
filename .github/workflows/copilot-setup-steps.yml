@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v7
@@ -56,3 +58,5 @@ jobs:
           python --version
           pip list | grep lightrag
           lightrag-server --help || echo "Note: Server requires .env configuration to run"
+    permissions:
+      contents: read
